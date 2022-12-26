@@ -15,16 +15,16 @@ import java.nio.file.StandardOpenOption;
 public class GitHubAPIExample {
 
   public static void main(String[] args) {
-    String[] repos={"spring-projects/spring-security","spring-projects/spring-kafka"};
-    String[] types={"contributors","commits","issues","releases"};
+    String[] repos = {"spring-projects/spring-security", "spring-projects/spring-kafka"};
+    String[] types = {"contributors", "commits", "issues", "releases"};
     for (String repo : repos) {
       for (String type : types) {
-        Bug(type,repo);
+        Bug(type, repo);
       }
     }
-//    Bug(types[0],repos[1]);
   }
-  public static void Bug(String type,String repo) {
+
+  public static void Bug(String type, String repo) {
     StringBuffer total_content = new StringBuffer();
     File folder = new File(repo.split("/")[0]);
     folder.mkdirs();
@@ -38,11 +38,11 @@ public class GitHubAPIExample {
       String pages = "&per_page=100&page=";
       int page = 1;
       String urlString =
-          "https://api.github.com/repos/"+repo+"/"+type + state
+          "https://api.github.com/repos/" + repo + "/" + type + state
               + pages;
 
-      while(true) {
-        URL url = new URL(urlString+page);
+      while (true) {
+        URL url = new URL(urlString + page);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Accept", "application/vnd.github+json");
@@ -61,11 +61,11 @@ public class GitHubAPIExample {
         in.close();
         con.disconnect();
         String result = content.toString();
-        if(result.equals("[]")) {
+        if (result.equals("[]")) {
           break;
         }
 //        total_content.append(result);
-        Path filePath = Paths.get(repo+"/"+type+"/"+page+".json");
+        Path filePath = Paths.get(repo + "/" + type + "/" + page + ".json");
         try (BufferedWriter writer = Files.newBufferedWriter(filePath, StandardCharsets.UTF_8,
             StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
           writer.write(result);

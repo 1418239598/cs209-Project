@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/releases")
 public class ReleaseRestController {
+
   private final RepoService repoService;
 
   public ReleaseRestController(RepoService repoService) {
@@ -20,8 +21,7 @@ public class ReleaseRestController {
   }
 
   @GetMapping("/morethan")
-  public List<Release> getReleaseMoreThan(@RequestParam(value = "num") Optional<Integer> num)
-  {
+  public List<Release> getReleaseMoreThan(@RequestParam(value = "num") Optional<Integer> num) {
     if (num.isPresent()) {
       return repoService.findByCommitsMoreThan(num.get());
     }
