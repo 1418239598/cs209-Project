@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Java2Project_GithubRepo</title>
+</head>
+<body>
+<h1>Repo List</h1>
+<table>
+  <tr th:each="repo: ${repos}">
+    <td th:text="${repo.name}">Name</td>
+    <td th:text="${repo.developerNum}">developerNum</td>
+    <td th:text="${repo.most_active_developer}">most_active_developer</td>
+    <td th:text="${repo.open_issues}">open_issues</td>
+    <td th:text="${repo.close_issues}">close_issues</td>
+    <td th:text="${repo.issue_solve_average}">issue_solve_average</td>
+    <td th:text="${repo.issue_extreme_value_diff}">issue_solve_max_day</td>
+    <td th:text="${repo.issue_solve_min_day}">issue_solve_min_day</td>
+    <td th:text="${repo.releases_num}">releases</td>
+    <td th:text="${repo.commit_times}">commit_times</td>
+    <td th:text="${repo.releases_top10_commits}">releases_top10_commits</td>
+    <td th:text="${repo.releases_commits}">releases_commits</td>
+  </tr>
+</table>
+</body>
+</html>
